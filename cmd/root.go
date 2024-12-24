@@ -118,20 +118,23 @@ func Run(ctx context.Context) error {
 					debounceTimer = time.AfterFunc(time.Second, func() {
 						// 在延迟时间后触发一次输出
 						for _, message := range messages {
-							err := robotgo.KeyTap("enter")
-							if err != nil {
-								logger.WithError(err).Errorf(ctx, "key tap enter error")
-								continue
+							msgs := strings.Split(message, "\n")
+							for _, msg := range msgs {
+								err := robotgo.KeyTap("enter")
+								if err != nil {
+									logger.WithError(err).Errorf(ctx, "key tap enter error")
+									continue
+								}
+								robotgo.MilliSleep(50)
+								robotgo.TypeStr(msg)
+								robotgo.MilliSleep(50)
+								err = robotgo.KeyTap("enter")
+								if err != nil {
+									logger.WithError(err).Errorf(ctx, "key tap enter error")
+									continue
+								}
+								time.Sleep(time.Millisecond * 100)
 							}
-							robotgo.MilliSleep(50)
-							robotgo.TypeStr(message)
-							robotgo.MilliSleep(50)
-							err = robotgo.KeyTap("enter")
-							if err != nil {
-								logger.WithError(err).Errorf(ctx, "key tap enter error")
-								continue
-							}
-							time.Sleep(time.Millisecond * 100)
 						}
 					})
 				})
