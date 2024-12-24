@@ -1,5 +1,8 @@
 # lolscm
 
+--help
+
+```bash
 NAME:
 lolscm - 英雄联盟快捷键模拟键盘操作发送游戏对局内的消息
 
@@ -20,7 +23,7 @@ GLOBAL OPTIONS:
 --shortcut value, -s value 消息快捷键，Windows 下通常为 Alt+Shift+模板序号（1-5），MacOS 下通常为 Command+Shift+模板序号（1-5）
 --help, -h show help
 --version, -v print the version
-
+```
 # MacOS 编译
 
 ```bash
